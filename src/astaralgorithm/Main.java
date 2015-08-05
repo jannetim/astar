@@ -5,6 +5,8 @@
  */
 package astaralgorithm;
 
+import java.awt.image.BufferedImage;
+
 
 /**
  *
@@ -17,6 +19,10 @@ public class Main {
      */
     public static void main(String[] args) {
         BitmapHandler bmh = new BitmapHandler();
-        bmh.handleMap();
+        BufferedImage map = bmh.handleMap();
+        Node node = new Node(0,0,null,0);
+        Node target = new Node(50, 60,null);
+        AStar algo = new AStar();
+        algo.AStar(node, target);
     }
 }

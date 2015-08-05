@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
  * @author jannetim
  */
 public class BitmapHandler {
-    public void handleMap() {
+    public BufferedImage handleMap() {
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File("astar.bmp"));
@@ -35,7 +35,7 @@ public class BitmapHandler {
 
         double percentPixel = 0;
 
-        System.out.println(height  + "  " +  width + " " + img.getRGB(30, 30));
+        //System.out.println(height  + "  " +  width + " " + img.getRGB(30, 30));
 
         for (int h = 1; h<height; h++)
         {
@@ -56,8 +56,10 @@ public class BitmapHandler {
         }
         percentPixel = (double)amountBlackPixel / (double)amountPixel;
 
-        System.out.println("amount pixel: "+amountPixel);
+        /*System.out.println("amount pixel: "+amountPixel);
         System.out.println("amount black pixel: "+amountBlackPixel);
-        System.out.println("amount pixel black percent: "+percentPixel);
+        System.out.println("amount pixel black percent: "+percentPixel);*/
+        
+        return img;
     }
 }
