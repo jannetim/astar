@@ -64,11 +64,7 @@ public class Node implements Comparable<Node> {
     }
 
     public int compareTo(Node o) {
-        if (this.x==o.x && this.y==o.y){
-            return 0;
-        } else {
-            return 1;
-        }
+        return this.f - o.getFCost();
     }
 
 }

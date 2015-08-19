@@ -9,7 +9,7 @@ package astaralgorithm;
  *
  * @author jannetim
  */
-public class Heap<T extends Comparable<T>>{
+public class Heap<T extends Comparable<T>> implements PriorityQueue<T> {
     
     private Node<T> head;
     
@@ -29,13 +29,21 @@ public class Heap<T extends Comparable<T>>{
         head = null;
     }
     
-    public void insert(T key) {
+    public void add(T key) {
         Node<T> node = new Node<T>(key);
-        
+    }
+    
+    public boolean contains(Object o) {
+        return true;
     }
     
     public T peek() {
         return head.key;
+    }
+
+    @Override
+    public Object removeMin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     private class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
@@ -51,6 +59,7 @@ public class Heap<T extends Comparable<T>>{
         
         @Override
         public int compareTo(Node<T> o) {
+            
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
         

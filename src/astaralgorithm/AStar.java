@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
  */
 public class AStar {
 
+    private PriorityQueue q;
     private List<Node> open;
     private List<Node> closed;
 

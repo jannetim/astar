@@ -9,10 +9,11 @@ package astaralgorithm;
  *
  * @author jannetim
  */
-public interface PriorityQueue {
+public interface PriorityQueue<T> {
     boolean isEmpty();
     
-    void add(Object o);
+    void add(T key);
     
     Object removeMin();
+
 }
