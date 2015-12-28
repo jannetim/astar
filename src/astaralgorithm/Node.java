@@ -59,10 +59,12 @@ public class Node implements Comparable<Node> {
         this.parent = parent;
     }
     
+    @Override
     public String toString(){
         return "X: " + this.x + ", Y: " + this.y;
     }
 
+    @Override
     public int compareTo(Node o) {
         return this.f - o.getFCost();
     }
