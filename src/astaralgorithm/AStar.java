@@ -18,17 +18,19 @@ import javax.imageio.ImageIO;
 public class AStar {
 
     private PriorityQueue q;
-    private List<Node> open;
-    private List<Node> closed;
-
+    //private List<Node> open;
+    //private List<Node> closed;
+    private MinHeap open;
+    private MinHeap closed;
+    
     /**
      * A*-algorithm
      *
      * @param start
      * @param target
-     * @param map
+     * @return 
      */
-    public String AStar(Node start, Node target) {        
+    public String AStar(Node start, Node target) throws NodeNotFoundException {        
         Node[][] nodemap = new Node[100][100];
         for (int i = 0; i < nodemap.length; i++) {
             for (int j = 0; j < nodemap[i].length; j++) {
@@ -38,12 +40,14 @@ public class AStar {
         nodemap[target.x][target.y] = target;
         Node current;
 
-        open = new LinkedList<Node>();
-        closed = new LinkedList<Node>();
-
+        //open = new LinkedList<>();
+        //closed = new LinkedList<>();
+        open = new MinHeap();
+        closed = new MinHeap();
+        
         open.add(start);
         while (!open.isEmpty()) {
-            current = lookForLowestF(target);
+            current = lookForLowestF();
             System.out.println(current.toString());
             closed.add(current);
             
@@ -77,13 +81,14 @@ public class AStar {
         //work the path
     }
 
-    private Node lookForLowestF(Node target) {
-        Node lowestF = open.get(0);
-        for (Node n : open) {
+    private Node lookForLowestF() {
+        //Node lowestF = open.get(0);
+        Node lowestF = open.findMin();
+        /*for (Node n : open) {
             if (n.f < lowestF.f) {
                 lowestF = n;
             }
-        }
+        }*/
         return lowestF;
     }
 

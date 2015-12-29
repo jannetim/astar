@@ -61,7 +61,7 @@ public class Node implements Comparable<Node> {
     
     @Override
     public String toString(){
-        return "X: " + this.x + ", Y: " + this.y;
+        return "X: " + this.x + ", Y: " + this.y + ", F cost: " + this.f;
     }
 
     @Override
