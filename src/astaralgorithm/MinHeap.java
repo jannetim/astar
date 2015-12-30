@@ -210,7 +210,7 @@ public class MinHeap {
     public void add(Node node) {
         insert(node);
     }
-
+    
     private class HeapNode {
 
         public HeapNode(Node node) {

@@ -20,8 +20,10 @@ public class Main {
     public static void main(String[] args) throws NodeNotFoundException {
         BitmapHandler bmh = new BitmapHandler();
         BufferedImage map = bmh.handleMap();
+        //Node node = new Node(0,0,null,0);
+        //Node target = new Node(50, 60,null);
         Node node = new Node(0,0,null,0);
-        Node target = new Node(50, 60,null);
+        Node target = new Node(9, 9,null);
         AStar algo = new AStar();
         algo.AStar(node, target);
         
