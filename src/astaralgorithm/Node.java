@@ -16,11 +16,14 @@ public class Node implements Comparable<Node> {
     int f;
     int g;
     int costFromPredecessor;
+    boolean block;
+    char character;
     
     public Node(int x, int y, Node parent) {
         this.x = x;
         this.y = y;
         this.parent = parent;
+        block = false;
     }
 
     public Node(int x, int y, Node parent, int g) {
@@ -61,7 +64,7 @@ public class Node implements Comparable<Node> {
     
     @Override
     public String toString(){
-        return "X: " + this.x + ", Y: " + this.y + ", F cost: " + this.f;
+        return "X: " + this.x + ", Y: " + this.y + ", F cost: " + this.f + ", G cost: " + this.g;
     }
 
     @Override
@@ -69,5 +72,20 @@ public class Node implements Comparable<Node> {
         return this.f - o.getFCost();
     }
 
+    public void setBlocked() {
+        this.block = true;
+    }
+    
+    public boolean isBlocked() {
+        return block;
+    }
+    
+    public void setCharacter(char c){
+        this.character = c;
+    }
+    
+    public char getCharacter() {
+        return character;
+    }
 }
 
