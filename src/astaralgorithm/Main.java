@@ -17,16 +17,20 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws NodeNotFoundException {
-        BitmapHandler bmh = new BitmapHandler();
-        BufferedImage map = bmh.handleMap();
-
+        MapHandler mh = new MapHandler();
         Node node = new Node(0, 0, null, 0);
-        Node target = new Node(20, 9, null);
-        AStar algo = new AStar(30, 10);
-        algo.AStar(node, target);
-        algo = new AStar(30, 10, true);
-        algo.generateBlockedNodes();
-        algo.AStar(node, target);        
+        Node target = new Node(17, 9, null);
+        
+        System.out.println("Kartta ilman estettyjä solmuja");
+        AStar algo = new AStar(mh.populateMap(50, 10, false));
+        Node result = algo.AStar(node, target);
+        mh.workThePath(result);
+        
+        System.out.println("\n\nKartta estetyillä solmuilla");
+        algo = new AStar(mh.populateMap(50, 10, true));
+        result = algo.AStar(node, target);
+        mh.workThePath(result);
 
     }
+
 }

@@ -17,49 +17,32 @@ import javax.imageio.ImageIO;
  */
 public class AStar {
 
-    private MinHeap open;
-    private MinHeap closed;
-    private char[][] map;
-    private char[][] blocked;
-    private Node[][] nodemap;
-    int mapWidth;
-    int mapHeight;
-    boolean blocks;
-
     /**
-     * A*-algorithm
-     *
-     * @param start
-     * @param target
-     * @return
+     * Minimum heap for "open" nodes
      */
-    public AStar(int width, int height) {
-        this.mapWidth = width;
-        this.mapHeight = height;
-        map = new char[mapHeight][mapWidth];
-        nodemap = new Node[mapHeight][mapWidth];
-        populateMap();
-    }
-    public AStar(int width, int height, boolean blocks) {
-        this.mapWidth = width;
-        this.mapHeight = height;
-        map = new char[mapHeight][mapWidth];
-        nodemap = new Node[mapHeight][mapWidth];
-        populateMap();
-        this.blocks = blocks;
+    private MinHeap open;
+    /**
+     * Minimum heap for "closed" nodes
+     */
+    private MinHeap closed;
+    /**
+     * Map of nodes i.e. the graph where the path is to be found
+     */
+    private Node[][] nodemap;
+
+    
+    public AStar(Node[][] nodemap) {
+        this.nodemap = nodemap;
     }
     
-    private void populateMap() {
-        for (int i = 0; i < nodemap.length; i++) {
-            for (int j = 0; j < nodemap[i].length; j++) {
-                nodemap[i][j] = new Node(j, i, null);
-            }
-        }
-    }
-
+    /**
+     * The A*-algorithm
+     * @param start Starting node
+     * @param target Goal node
+     * @return Found goal node
+     * @throws NodeNotFoundException 
+     */
     public Node AStar(Node start, Node target) throws NodeNotFoundException {
-
-        //generateBlockedNodes();
         nodemap[target.y][target.x] = target;
         nodemap[start.y][start.x] = start;
         Node current;
@@ -70,13 +53,9 @@ public class AStar {
         open.add(start);
         while (!open.isEmpty()) {
             current = lookForLowestF();
-            //System.out.println(current.toString());
-            //System.out.println("cur  h " + calculateHCost(current, target));
-            //mapHelper(current, target);
             closed.add(current);
             if (current.equals(target)) {
                 System.out.println("!");
-                workThePath(target);
                 return current;
             }
             open.remove(current);
@@ -101,11 +80,9 @@ public class AStar {
         }
         System.out.println("Can't find path");
         return null;
-        //work the path
     }
 
     private Node lookForLowestF() {
-        //Node lowestF = open.get(0);
         Node lowestF = open.findMin();
 
         return lowestF;
@@ -192,64 +169,8 @@ public class AStar {
      * @return
      */
     private int calculateHCost(Node node, Node target) {
-        /*int a = Math.abs(node.x - node.y);
-         int b = Math.abs(target.x - target.y);
-         if (a < b) {
-         return a * 2;
-         } else {
-         return b * 2;
-         }*/
         int dx = Math.abs(node.x - target.x);
         int dy = Math.abs(node.y - target.y);
-        //System.out.println((dx + dy) + (1 - 2 * 1) * Math.min(dx, dy));
         return 10 * (dx + dy) + (14 - 2 * 10) * Math.min(dx, dy);
     }
-
-    private void workThePath(Node target) {
-        map = new char[mapHeight][mapWidth];
-        generateBlockedNodes();
-        while (target != null) {
-            System.out.println("");
-            //System.out.println(target.toString() + "...");
-            map[target.y][target.x] = 'x';
-            target = target.parent;
-        }
-        for (int i = 0; i < map.length; i++) {
-            System.out.println("");
-            for (int j = 0; j < map[i].length; j++) {
-                System.out.print(map[i][j]);
-            }
-        }
-    }
-
-    private void mapHelper(Node current, Node target) {
-
-        map[current.y][current.x] = '+';
-        map[target.y][target.x] = '0';
-        current = current.parent;
-        while (current != null) {
-            map[current.y][current.x] = 'x';
-            current = current.parent;
-        }
-        for (int i = 0; i < map.length; i++) {
-            System.out.println("");
-            for (int j = 0; j < map[i].length; j++) {
-                System.out.print(map[i][j]);
-            }
-        }
-
-        System.out.println("");
-        System.out.println("");
-
-    }
-
-    public void generateBlockedNodes() {
-        if (blocks) {
-            for (int i = 0; i < 9; i++) {
-                map[i][mapWidth / 4] = 'B';
-                nodemap[i][mapWidth / 4].setBlocked();
-            }
-        }
-    }
-
 }
