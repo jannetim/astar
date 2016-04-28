@@ -25,6 +25,7 @@ public class Main {
         AStar algo = new AStar(30, 10);
         algo.AStar(node, target);
         algo = new AStar(30, 10, true);
+        algo.generateBlockedNodes();
         algo.AStar(node, target);        
 
     }

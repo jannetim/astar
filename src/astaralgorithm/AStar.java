@@ -17,12 +17,10 @@ import javax.imageio.ImageIO;
  */
 public class AStar {
 
-    private PriorityQueue q;
-    //private List<Node> open;
-    //private List<Node> closed;
     private MinHeap open;
     private MinHeap closed;
     private char[][] map;
+    private char[][] blocked;
     private Node[][] nodemap;
     int mapWidth;
     int mapHeight;
@@ -61,22 +59,20 @@ public class AStar {
 
     public Node AStar(Node start, Node target) throws NodeNotFoundException {
 
-        generateBlockedNodes();
+        //generateBlockedNodes();
         nodemap[target.y][target.x] = target;
         nodemap[start.y][start.x] = start;
         Node current;
 
-        //open = new LinkedList<>();
-        //closed = new LinkedList<>();
         open = new MinHeap();
         closed = new MinHeap();
         start.setFCost(calculateFCost(start, target));
         open.add(start);
         while (!open.isEmpty()) {
             current = lookForLowestF();
-            System.out.println(current.toString());
-            System.out.println("cur  h " + calculateHCost(current, target));
-            mapHelper(current, target);
+            //System.out.println(current.toString());
+            //System.out.println("cur  h " + calculateHCost(current, target));
+            //mapHelper(current, target);
             closed.add(current);
             if (current.equals(target)) {
                 System.out.println("!");
@@ -214,7 +210,7 @@ public class AStar {
         generateBlockedNodes();
         while (target != null) {
             System.out.println("");
-            System.out.println(target.toString() + "...");
+            //System.out.println(target.toString() + "...");
             map[target.y][target.x] = 'x';
             target = target.parent;
         }
@@ -250,8 +246,8 @@ public class AStar {
     public void generateBlockedNodes() {
         if (blocks) {
             for (int i = 0; i < 9; i++) {
-                map[i][mapWidth / 3] = 'B';
-                nodemap[i][mapWidth / 3].setBlocked();
+                map[i][mapWidth / 4] = 'B';
+                nodemap[i][mapWidth / 4].setBlocked();
             }
         }
     }

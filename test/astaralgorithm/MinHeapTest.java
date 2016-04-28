@@ -18,6 +18,7 @@ import static org.junit.Assert.*;
  */
 public class MinHeapTest {
     MinHeap mh;
+    Node node;
     public MinHeapTest() {
     }
 
@@ -32,6 +33,8 @@ public class MinHeapTest {
     @Before
     public void setUp() {
         mh = new MinHeap();
+        node = new Node(1,2,null,0);    
+
     }
 
     @After
@@ -44,9 +47,24 @@ public class MinHeapTest {
     // @Test
     // public void hello() {}
     @Test
-    public void insertWorks() {
-        Node node = new Node(1,2,null,0);
+    public void insertWorks() throws NodeNotFoundException {
+        assertTrue(mh.isEmpty());
         mh.insert(node);
+        assertTrue(!mh.isEmpty());
+        assertTrue(mh.contains(node));
     }
 
+    @Test
+    public void removeWorks() {
+        Node node = new Node(1,2,null,0);    
+        mh.insert(node);
+        assertEquals(mh.removeMin(), node);
+        assertTrue(mh.isEmpty());
+    }
+    
+    @Test
+    public void findWorks() throws NodeNotFoundException {
+        mh.insert(node);
+        assertEquals(mh.find(node), node);
+    }
 }
