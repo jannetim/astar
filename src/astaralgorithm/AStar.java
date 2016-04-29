@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * A* path finding 
  * @author jannetim
  */
 public class AStar {
@@ -30,7 +30,10 @@ public class AStar {
      */
     private Node[][] nodemap;
 
-    
+    /**
+     * A*
+     * @param nodemap Matrix of nodes that for a "map"
+     */
     public AStar(Node[][] nodemap) {
         this.nodemap = nodemap;
     }
@@ -81,13 +84,22 @@ public class AStar {
         System.out.println("Can't find path");
         return null;
     }
-
+    /**
+     * Gets the node with lowest F-value (g + h) 
+     * @return 
+     */
     private Node lookForLowestF() {
         Node lowestF = open.findMin();
 
         return lowestF;
     }
 
+    /**
+     * Calculates neighboring nodes and their costs
+     * @param n Node whose neighbors are to be checked
+     * @param map Map of nodes
+     * @return 
+     */
     private ArrayList<Node> considerNeighbors(Node n, Node[][] map) {
         ArrayList neighborNodes = new ArrayList();
         if (n.x > 0 && n.y < map.length - 1) {
