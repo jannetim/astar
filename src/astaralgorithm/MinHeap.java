@@ -6,15 +6,27 @@
 package astaralgorithm;
 
 /**
- *
+ *  Minimum heap to be used with A*
  * @author jannetim
  */
 public class MinHeap {
-
+    /**
+     * Root node of the heap
+     */
     HeapNode root;
+    /**
+     * Last node in the heap
+     */
     HeapNode lastNode;
+    /**
+     * Amount of nodes in the heap
+     */
     int count;
 
+    /**
+     * Inserts a new node in to the heap
+     * @param node Node to be inserted
+     */
     public void insert(Node node) {
         HeapNode heapNode = new HeapNode(node);
         // check if there's no root, i.e. the heap is empty
@@ -37,6 +49,10 @@ public class MinHeap {
         }
     }
 
+    /**
+     * 
+     * @return 
+     */
     private HeapNode getNextParent() {
         HeapNode result = lastNode;
         while ((result != root) && (result != result.parent.left)) {
@@ -61,6 +77,9 @@ public class MinHeap {
         return result;
     }
 
+    /**
+     * Add new node and then adjust the branches
+     */
     private void heapifyAdd() {
         Node temp;
         HeapNode next = lastNode;
@@ -72,7 +91,10 @@ public class MinHeap {
             next = next.parent;
         }
     }
-
+    /**
+     * Removes the node with lowest value
+     * @return Removed node
+     */
     public Node removeMin() {
         if (count == 0) {
             return null;
@@ -96,7 +118,7 @@ public class MinHeap {
         count--;
         return minimum;
     }
-
+    
     private HeapNode getNewLastNode() {
         HeapNode result = lastNode;
 
@@ -113,7 +135,9 @@ public class MinHeap {
         }
         return result;
     }
-
+    /**
+     * Removes the node and adjusts the brances
+     */
     private void heapifyRemove() {
         Node temp;
         HeapNode node = (HeapNode) root;
@@ -153,7 +177,12 @@ public class MinHeap {
             }
         }
     }
-
+    /**
+     * Checks whether heap contains some certain node 
+     * @param node Node that is to be looked for
+     * @return Boolean value if the node was found or not
+     * @throws NodeNotFoundException 
+     */
     public boolean contains(Node node) throws NodeNotFoundException {
         Node temp;
         boolean found = false;
@@ -166,7 +195,12 @@ public class MinHeap {
         }
         return found;
     }
-
+    /**
+     * Searches for some certain node
+     * @param node Node to be looked for
+     * @return Found node
+     * @throws NodeNotFoundException 
+     */
     public Node find(Node node) throws NodeNotFoundException {
         HeapNode current = findNode(node, root);
         if (current == null) {
@@ -210,7 +244,9 @@ public class MinHeap {
     public void add(Node node) {
         insert(node);
     }
-    
+    /**
+     * HeapNode used with the heap. Encapsules hierarchy data within the heap and actual node used with A*
+     */
     private class HeapNode {
 
         public HeapNode(Node node) {

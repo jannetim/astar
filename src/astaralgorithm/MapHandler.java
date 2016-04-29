@@ -76,11 +76,14 @@ public class MapHandler {
      */
     public void generateBlockedNodes() {
         if (blocks) {
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < height-1; i++) {
                 charmap[i][width / 5] = 'B';
                 nodemap[i][width / 5].setBlocked();
             }
-            
+            for (int i = height -1 ; i > 0; i--) {
+                charmap[i][width / 3] = 'B';
+                nodemap[i][width / 3].setBlocked();
+            }            
             for (int i = 0; i < 15; i++) {
                 charmap[ThreadLocalRandom.current().nextInt(0, height-1)][ThreadLocalRandom.current().nextInt(0, width-1)] = 'B';
                 nodemap[ThreadLocalRandom.current().nextInt(0, height-1)][ThreadLocalRandom.current().nextInt(0, width-1)].setBlocked();                
