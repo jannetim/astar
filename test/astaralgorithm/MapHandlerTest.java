@@ -45,6 +45,14 @@ public class MapHandlerTest {
     // public void hello() {}
     @Test
     public void mapHandlerCreatesMap() {
-        
+        Node[][] map = mh.populateMap(10, 10, false);
+        assertNotNull(map);
+    }
+    
+    @Test
+    public void createdMapIsRightSize() {
+        Node[][] map = mh.populateMap(10, 15, false);
+        assertEquals(map.length,15);
+        assertEquals(map[0].length,10);
     }
 }

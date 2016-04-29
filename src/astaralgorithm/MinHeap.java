@@ -208,7 +208,12 @@ public class MinHeap {
         }
         return current.node;
     }
-
+    /**
+     * Finds heapNode connected to some certain node
+     * @param node A* node
+     * @param next HeapNode to be looked for
+     * @return Found HeapNode
+     */
     private HeapNode findNode(Node node, HeapNode next) {
         if (next == null) {
             return null;
@@ -225,22 +230,35 @@ public class MinHeap {
         }
         return temp;
     }
-
+    /**
+     * Removes some certain node
+     * @param node Node to be removed
+     */
     public void remove(Node node) {
         removeMin();
     }
-
+    /**
+     * Finds minimum value node
+     * @return Found min node
+     */
     public Node findMin() {
         if (count == 0) {
             return null;
         }
         return root.node;
     }
-
+    /**
+     * Checks if the heap is empty
+     * @return boolean-value whether heap is empty
+     */
     public boolean isEmpty() {
         return (count == 0);
     }
 
+    /**
+     * Calls insert
+     * @param node 
+     */
     public void add(Node node) {
         insert(node);
     }

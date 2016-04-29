@@ -18,17 +18,18 @@ public class Main {
      */
     public static void main(String[] args) throws NodeNotFoundException {
         MapHandler mh = new MapHandler();
-        Node node = new Node(0, 0, null, 0);
-        Node target = new Node(21, 9, null);
+        
+        Node start = new Node(0, 0, null, 0);
+        Node goal = new Node(21, 9, null);
         
         System.out.println("Kartta ilman estettyjä solmuja");
         AStar algo = new AStar(mh.populateMap(50, 10, false));
-        Node result = algo.AStar(node, target);
+        Node result = algo.AStar(start, goal);
         mh.workThePath(result);
         
         System.out.println("\n\nKartta estetyillä solmuilla");
         algo = new AStar(mh.populateMap(50, 10, true));
-        result = algo.AStar(node, target);
+        result = algo.AStar(start, goal);
         mh.workThePath(result);
 
     }

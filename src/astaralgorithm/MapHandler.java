@@ -6,7 +6,7 @@
 package astaralgorithm;
 import java.util.concurrent.ThreadLocalRandom;
 /**
- *
+ * Class for creating Node[][]-maps for A*. Also includes feature for char[][]-representation of the map.
  * @author jannetim
  */
 public class MapHandler {

@@ -47,8 +47,12 @@ public class MinHeapTest {
     // @Test
     // public void hello() {}
     @Test
-    public void insertWorks() throws NodeNotFoundException {
+    public void newHeapIsEmpty() {
         assertTrue(mh.isEmpty());
+    }
+    
+    @Test
+    public void insertWorks() throws NodeNotFoundException {
         mh.insert(node);
         assertTrue(!mh.isEmpty());
         assertTrue(mh.contains(node));
